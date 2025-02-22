@@ -9,6 +9,10 @@ class Appointment(Document):
     def before_save(self):
         self.end_date = calculate_end_datetime(self.start_date, self.duration)
 
+        seller_roles = frappe.get_roles(self.seller)
+        if "Seller" not in seller_roles:
+            frappe.throw("O usuário selecionado não possui a role 'Seller'.")
+
         appointments_has_conflict = frappe.db.sql("""
             SELECT name
             FROM `tabAppointment`
