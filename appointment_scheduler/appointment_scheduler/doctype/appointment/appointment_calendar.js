@@ -5,8 +5,6 @@ frappe.views.calendar["Appointment"] = {
 		id: "name",
 		allDay: "all_day",
 		title: "client_name",
-		color: "color",
-		status: "status",
 	},
 	order_by: "start_date",
 	get_events_method: "appointment_scheduler.appointment_scheduler.events.get_events",
@@ -18,6 +16,8 @@ frappe.views.calendar["Appointment"] = {
 				return "success";
 			case "Canceled":
 				return "danger";
+			default:
+				return "info";
 		}
 	},
 };
